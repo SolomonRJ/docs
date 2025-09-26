@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# RAG Document Q&A System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A complete Retrieval-Augmented Generation (RAG) system that allows users to upload documents and ask questions about their content using AI.
 
-## Available Scripts
+## 🔄 Complete Flow
 
-In the project directory, you can run:
+1. **Upload** → Parse documents (PDF, DOCX, TXT)
+2. **Chunk** → Split into 500-character chunks
+3. **Embed** → Generate embeddings using Gemini API
+4. **Store** → Save chunks and embeddings in MongoDB
+5. **Query** → User asks questions
+6. **Retrieve** → Find most relevant chunks using similarity search
+7. **Generate** → Use Gemini to generate answers with context
+8. **Display** → Show results in clean UI
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Multi-format Support**: PDF, DOCX, and TXT files
+- **Smart Chunking**: Optimal 500-character chunks for better context
+- **Vector Search**: Cosine similarity for finding relevant content
+- **AI-Powered Answers**: Gemini Pro for natural language responses
+- **Source Attribution**: Shows which documents were used
+- **Real-time Processing**: Live upload and query status
+- **Clean UI**: Modern, responsive interface
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📋 Prerequisites
 
-### `npm test`
+- Node.js (v14 or higher)
+- MongoDB (running locally on port 27017)
+- Gemini API key from Google AI Studio
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Setup
 
-### `npm run build`
+1. **Clone and Install**
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Set up Environment Variables**
+   ```bash
+   cp .env.example .env
+   ```
+   Add your Gemini API key to the `.env` file:
+   ```
+   GEMINI_API_KEY=your_actual_api_key_here
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Start MongoDB**
+   Make sure MongoDB is running on `mongodb://localhost:27017`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Start the Backend Server**
+   ```bash
+   cd src/Backend
+   node server.js
+   ```
 
-### `npm run eject`
+5. **Start the Frontend**
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🎯 How to Use
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Upload Documents**: Click the attachment icon and select PDF, DOCX, or TXT files
+2. **Process Files**: Click "Upload Files" to process and store them
+3. **Ask Questions**: Type your question in the input field
+4. **Get Answers**: The AI will provide answers based on your documents
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🏗️ Architecture
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Backend (`src/Backend/`)
+- **server.js**: Express server with upload and query endpoints
+- **utils.js**: Embedding generation, similarity calculation, and AI response
+- **models/docChunk.js**: MongoDB schema for document chunks
 
-## Learn More
+### Frontend (`src/components/`)
+- **Hero.jsx**: Main interface for file upload and querying
+- **Header.jsx**: Navigation header
+- **App.js**: Main application component
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 API Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `POST /upload`: Upload and process documents
+- `POST /query`: Ask questions about uploaded documents
+- `GET /files`: List uploaded files
+- `DELETE /documents`: Clear all documents
 
-### Code Splitting
+## 🎨 Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Frontend**: React, Tailwind CSS, React Icons
+- **Backend**: Node.js, Express, MongoDB, Mongoose
+- **AI**: Google Gemini API (embeddings + text generation)
+- **File Processing**: pdf-parse, mammoth, express-fileupload
 
-### Analyzing the Bundle Size
+## 📝 Supported File Types
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **PDF**: Extracted using pdf-parse
+- **DOCX**: Processed with mammoth
+- **TXT**: Direct text reading
 
-### Making a Progressive Web App
+## 🔍 How It Works
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Document Processing**: Files are parsed and split into manageable chunks
+2. **Embedding Generation**: Each chunk gets a vector representation using Gemini
+3. **Storage**: Chunks and embeddings stored in MongoDB
+4. **Query Processing**: User questions are embedded and compared to stored chunks
+5. **Context Retrieval**: Top 5 most similar chunks are selected
+6. **Answer Generation**: Gemini generates answers using the retrieved context
 
-### Advanced Configuration
+## 🚨 Troubleshooting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **MongoDB Connection**: Ensure MongoDB is running on port 27017
+- **API Key**: Verify your Gemini API key is correct in `.env`
+- **File Upload**: Check file formats are supported (PDF, DOCX, TXT)
+- **Server**: Make sure backend server is running on port 5000
 
-### Deployment
+## 📈 Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Support for more file formats (PPT, Excel, etc.)
+- Advanced chunking strategies
+- Multiple embedding models
+- Chat history
+- Document management interface
+- Deployment configurations
