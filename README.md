@@ -26,7 +26,7 @@ A complete Retrieval-Augmented Generation (RAG) system that allows users to uplo
 ## 📋 Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (running locally on port 27017)
+- MongoDB Atlas account (or local MongoDB)
 - Gemini API key from Google AI Studio
 
 ## 🛠️ Setup
@@ -40,21 +40,19 @@ A complete Retrieval-Augmented Generation (RAG) system that allows users to uplo
    ```bash
    cp .env.example .env
    ```
-   Add your Gemini API key to the `.env` file:
+   Add your Gemini API key and MongoDB URI to the `.env` file:
    ```
    GEMINI_API_KEY=your_actual_api_key_here
+   MONGODB_URI=your_mongodb_atlas_connection_string
    ```
 
-3. **Start MongoDB**
-   Make sure MongoDB is running on `mongodb://localhost:27017`
-
-4. **Start the Backend Server**
+3. **Start the Backend Server**
    ```bash
    cd src/Backend
    node server.js
    ```
 
-5. **Start the Frontend**
+4. **Start the Frontend**
    ```bash
    npm start
    ```

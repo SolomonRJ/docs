@@ -7,16 +7,22 @@ import cors from 'cors';
 import { chunkText, getEmbeddings, cosineSimilarity, generateAnswer } from './utils.js';
 import { docChunk } from '../models/docChunk.js';
 
+// Load environment variables
+import dotenv from 'dotenv';
+dotenv.config();
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
-mongoose.connect("mongodb://localhost:27017/docs", {
+const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/docs";
+
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected"))
+.then(() => console.log("MongoDB Atlas connected successfully"))
 .catch(err => console.error(err));
 
 // Upload and process documents

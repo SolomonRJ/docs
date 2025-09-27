@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+// Load environment variables
+import dotenv from 'dotenv';
+dotenv.config();
+
 export function chunkText(text, chunkSize = 500) {
     const chunks = [];
     for (let i = 0; i < text.length; i += chunkSize) {
