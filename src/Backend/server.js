@@ -4,11 +4,11 @@ import fileUpload from 'express-fileupload';
 import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import { chunkText, getEmbeddings, cosineSimilarity, generateAnswer } from './utils.js';
 import { docChunk } from '../models/docChunk.js';
 
 // Load environment variables
-import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
