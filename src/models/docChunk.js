@@ -8,3 +8,4 @@ const docChunkSchema = new mongoose.Schema({
     timestamps: true
 });
 
+export const docChunk = mongoose.model('DocChunk', docChunkSchema);
