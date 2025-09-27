@@ -6,7 +6,7 @@ import mammoth from 'mammoth';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { chunkText, getEmbeddings, cosineSimilarity, generateAnswer } from './utils.js';
-import { docChunk } from '../models/docChunk.js';
+import { docChunk } from '../../models/docChunk.js';
 
 // Load environment variables
 dotenv.config();
